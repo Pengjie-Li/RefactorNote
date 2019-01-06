@@ -91,6 +91,77 @@
 * Replace Type Code with State or Strategy (227)
 * Replace Conditional with Polymorphism (255)
 * 当然，如果只是在单一函数中出现，这个时候用多态就是杀鸡用牛刀了
+## 3.11 平行继承体系 Parallel Inheritance Hierarchies ##
+* Shotgun Surgery 的特殊情况
+* 情况介绍
+	* 当你为某个类增加子类，必须为另外一个类增加相应的子类 
+* 消除这种重复性的策略
+	* 让一个继承体系的实例引用另外一个继承体系的实例
+* Move Method (142)
+* Move Field (146)
 
+## 3.12 冗余类 Lazy class ##
+* 有些创建的类是多余的
+* Collapse Heerarchy (344) 
+## 3.13 夸夸奇谈未来性  Speculative Generality ##
+* 这个坏味道和和冗余类是相似的
+* 情况介绍
+	* 因为将来需要用到，于是设计之初就企图以各式各样的钩子或者特殊情况来处理非必要的事情
+* Collapse Hierarchy (344)
+* Inline Class (154)
+* Remove Parameter (277)
+* Rename Method (273)
+## 3.14 令人迷惑的临时字段 Temporary Field ##
+* 某个实例变量仅仅是为某种特定情况而设置
+## 3.15 过度耦合的消息链 Message Chains ##
+* 情况
+	* 用户向一个对象请求另外一个对象，再向后者请求另外一个对象，然后再向后后者请求另外一个对象，这就是消息链
+	* 可以看到一长串的getThis() 或者一长串临时变量
+	* 一旦对象间的关系发生变化，客户端不得不做出相应的改变
+* Hide Delegate (157)
+* 或者观察消息链，看看最终得到的对象是用来做什么，看看能否Extract Method (110)
+## 3.16 Middle Man 中间人 ##
+* 对象的基本特征之一：封装, 对外部世界隐藏内部细节
+* 避免过度委托
+* Remove Middle Man (160)
+* Inline Method (117)
+* Replace Delegation with Inheritance (355)
+## 3.17 过度亲密行为 Inappropriate Intimacy ##
+* 两个类过于亲密，探究彼此的private 部分
+* Move Method (142)
+* Move Field (146)
+* Change Bidirectional Association to Unidirectional (200)
+* Hide Delegate (157)
 
+## 3.18 异曲同工的类 Alternative Classes with Different Interfaces ##
+* 情况:
+	* 两个函数做同一个事情，却又不同的签名
+* Rename Method (273)
+* Extract Superclass (336)
+## 3.19 不完美类库 Incomplete Library Class ##
+* 许多编程技术都是建立在程序库的基础上
+* 修改类库的函数
+	* Introduce Foreign Method (162)
+	* Introduce Local Extension (164)
+## 3.20 Data Class 单纯的数据类 ## 
+* Data Class 只是不会说话的数据容器
+* Encapsulate Field (206)
+* Encapsulate Colletion (208)
+* 不应该被其他类修改的字段，运用Remove Setting Method (300)
+* Data Class 可以作为起点,但是最终必须承担起别的任务而不是一个单纯的数据容器
+## 3.21 被拒绝的遗赠 Refused Bequest ## 
+* 情况：
+	* 子类可以继承父类的函数和数据，如果不想继承全部，只想要其中一部分怎么办
+* 这意味着继承体系设计失误
+* Push Down Method (328) 和 Push Down Field (329)
 
+## 3.22 Comments (过多的解释) ##
+* **情况**
+	* 如果你看到一段代码有着长长的注释
+	* 这些注释之所以出现就是因为代码很糟糕
+* 完成重构后注释会显得多余
+* **条件**
+	* 如果你需要注释来解释一段代码干了什么，那么试试 Extract Method (110)
+* Rename Method (273)
+* Introduce Assertion (267)
+> 当你感觉需要撰写注释时，请先尝试重构，试着让所有的注释变得多余
